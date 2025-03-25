@@ -17,9 +17,44 @@
             # enviar a msg
             # limpar a cx de msg
 
-
 # Podemos usar algumas ferramentas : Flask e Django (cria site py), kivy(cria aplicativo), tkinter (cria telas p seu prog)
-# nesse projeto vamos usar o Flet => no py cria site, aplicativo e prog no computador.
+# nesse projeto vamos usar o Flet => faz front e back => no py cria site, aplicativo e prog no computador.
 # nele voce cria oque o usuario ve e a logica por tras do codigo = vc cria o front e o back , com o mesmo prog vc cria um site um prog de comp e um aplicavo
+
 # vamos instalar o flet no notebook
 # pip install flet
+
+# sempre que quiser usar o flet fazer 3 passos
+#  1 importar o flet
+import flet as ft
+
+# 2 - criar uma funcao principal para rodar o seu aplicativo
+# def  nome_da_funcao(parametro):
+#      o que essa funcao vai fazer
+#      passo 1
+#      passo 2
+#      passo 3
+#      passo 4
+
+# def vc cria a funcao parametro que ela precisa funcionar e parametro p ela func (:) oque essa funcao vai fazer (passo 1, passo 2, passo 3 ....)
+# essa funcao e para que sempre que o usuario entrar no site vai acontecer algo no site
+# o usuario executa essa funcao passo a passo, uma logica de passo a passo
+# dentro da main se cria toda a funcionalidade do site
+
+def main():
+  # colocar oque essa funcao vai fazer
+
+# executar essa funcao com o flet
+ft.app(main)  # passa a funcao principal q ele vai executar
+
+# toda vez que for construir um projeto no Flet tem que ter essas 3 linhas
+# 1 - import flet as ft
+# 2 - def main():
+# 3 - ft.app(main)  # passa a funcao principal q ele vai executar
+
+
+
+
+
+
+# 3 - executar essa funcao com o flet
