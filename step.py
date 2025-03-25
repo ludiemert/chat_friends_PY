@@ -16,3 +16,10 @@
             # quando clicar no botao enviar
             # enviar a msg
             # limpar a cx de msg
+
+
+# Podemos usar algumas ferramentas : Flask e Django (cria site py), kivy(cria aplicativo), tkinter (cria telas p seu prog)
+# nesse projeto vamos usar o Flet => no py cria site, aplicativo e prog no computador.
+# nele voce cria oque o usuario ve e a logica por tras do codigo = vc cria o front e o back , com o mesmo prog vc cria um site um prog de comp e um aplicavo
+# vamos instalar o flet no notebook
+# pip install flet
