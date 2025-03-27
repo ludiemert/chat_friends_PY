@@ -19,26 +19,38 @@ def main(pagina: ft.Page):
 
     # Botão inicial (corrigido)
     botao = ft.ElevatedButton(
-        "Start Chat",
+        "StartChat",
         style=ft.ButtonStyle(
             bgcolor="black",
             text_style=ft.TextStyle(
                 weight=ft.FontWeight.BOLD,
                 color="white",
+                size=40,
             ),
         ),
     )
 
     # Criar um layout de coluna e adicionar os elementos
-    layout = ft.Column(
+    coluna = ft.Column(
         [titulo, botao],  # Adiciona os componentes na coluna
         alignment=ft.MainAxisAlignment.CENTER,  # Centraliza verticalmente
         horizontal_alignment=ft.CrossAxisAlignment.CENTER,  # Centraliza horizontalmente
         spacing=20,  # Espaçamento entre os elementos
     )
 
+    # Criar container colorido
+    container = ft.Container(
+        content=coluna,
+        padding=40, # espaco interno
+        bgcolor=ft.colors.BLUE_100, # or de fundo azul claro
+        border_radius=20, #bordar arredondadas
+        width=600, # largura container
+
+    )
+
+
     # Adicionar o layout à página
-    pagina.add(layout)
+    pagina.add(container)
 
 # Executar a aplicação no navegador
 ft.app(target=main, view=ft.WEB_BROWSER)
