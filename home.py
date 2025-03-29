@@ -17,15 +17,22 @@ def main(pagina: ft.Page):
         weight=ft.FontWeight.BOLD,
     )
 
+    # criar a funcao criar funcao abrir popup, que vai dizer  oque vai acontecer qdo clicar no botao
+    def abrir_popup(evento): #funcao, recebe evento click no botao, e registra todas as informacoes
+            print("Clicou no botao")    # evento
+
     # Botão inicial (corrigido)
     botao = ft.ElevatedButton(
-        "StartChat",
+        "Start_Chat", on_click=abrir_popup, # parametro on_click para ele executar algo, exemplo abrir poupup
+        width=200, #largura bortao
+        height=80, # altura do botao
+
         style=ft.ButtonStyle(
-            bgcolor="black",
+          bgcolor="black",
             text_style=ft.TextStyle(
-                weight=ft.FontWeight.BOLD,
-                color="white",
-                size=40,
+            weight=ft.FontWeight.BOLD,
+            color="white",
+            size=30,
             ),
         ),
     )
@@ -45,9 +52,7 @@ def main(pagina: ft.Page):
         bgcolor=ft.colors.BLUE_100, # or de fundo azul claro
         border_radius=20, #bordar arredondadas
         width=600, # largura container
-
     )
-
 
     # Adicionar o layout à página
     pagina.add(container)
