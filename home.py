@@ -18,8 +18,10 @@ def main(pagina: ft.Page):
     )
 
     # criar a funcao criar funcao abrir popup, que vai dizer  oque vai acontecer qdo clicar no botao
-    def abrir_popup(evento): #funcao, recebe evento click no botao, e registra todas as informacoes
-            print("Clicou no botao")    # evento
+    # precisa haver um evento apos click no botao (voce pega varias informacoes, desse parametro)
+    def abrir_popup(evento): #funcao,precisa ter o evento, recebe evento click no botao, e registra todas as informacoes
+            # print("Clicou no botao")    # evento de print
+            #precisa ser criado o evento de abrir popup
 
     # Botão inicial (corrigido)
     botao = ft.ElevatedButton(
