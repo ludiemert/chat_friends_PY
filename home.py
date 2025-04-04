@@ -1,74 +1,46 @@
-# Importar o Flet
 import flet as ft
 
-# Criar a função principal para rodar o aplicativo
-def main(pagina: ft.Page):
-    # Definir o título da janela
-    pagina.title = "Chat_friends"
+def main(page: ft.Page):
+    page.title = "Chat_friends"
+    page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
+    page.vertical_alignment = ft.MainAxisAlignment.CENTER
 
-    # Definir alinhamento da página (centro)
-    pagina.horizontal_alignment = ft.CrossAxisAlignment.CENTER
-    pagina.vertical_alignment = ft.MainAxisAlignment.CENTER
-
-    # Definir o texto do título com tamanho maior e negrito
-    titulo = ft.Text(
-        "Chat_friends",
-        size=40,
-        weight=ft.FontWeight.BOLD,
+    # Popup
+    popup = ft.AlertDialog(
+        modal=True,
+        title=ft.Text("Welcome to chat"),
+        content=ft.TextField(label="Digite seu nome"),
+        actions=[ft.ElevatedButton("Start Chat 🥳")]
     )
 
-    # criar a funcao criar funcao abrir popup, que vai dizer  oque vai acontecer qdo clicar no botao
-    # precisa haver um evento apos click no botao (voce pega varias informacoes, desse parametro)
+    def open_dlg(e):
+        page.dialog = popup
+        popup.open = True
+        page.update()
 
-    #criar o popup no flet ele eh chamado de AlertDialog
-    #criar popup
-    titulo_popup = ft.Text("Welcome to chat") # aparece para o usuario
-    box_name = ft.TextField()
-    buttom_popup = ft.ElevatedButton("Start Chat🥳")
-    buttom_popup2 = ft.ElevatedButton("Test buttom👏")
-
-    popup = ft.AlertDialog(title=titulo_popup, content=box_name
-                           actions=[buttom_popup, buttom_popup2]) # o usuario que preenche, parametro de actions eh para colocar botao, sao acoes que vao ter dentro do popup oque o usuario pode fazer com aquilo, quais sao os botoes que tem ali dentro, ele vem no plural para voce ter mais de uma acao dentro do popup, entao passa um list de botoes que ele vai executar, e toda lista no PY eh entre [], vou passar uma lista com somente uma acao
-
-    def abrir_popup(evento): #funcao,precisa ter o evento, recebe evento click no botao, e registra todas as informacoes
-            # print("Clicou no botao")    # evento de print
-            #precisa ser criado o evento de abrir popup de converda na tela
-
-    # Botão inicial (corrigido)
-    botao = ft.ElevatedButton(
-        "Start_Chat", on_click=abrir_popup, # parametro on_click para ele executar algo, exemplo abrir poupup
-        width=200, #largura bortao
-        height=80, # altura do botao
-
+    # Botão principal
+    btn = ft.ElevatedButton(
+        "Start Chat",
+        on_click=open_dlg,
         style=ft.ButtonStyle(
-          bgcolor="black",
-            text_style=ft.TextStyle(
-            weight=ft.FontWeight.BOLD,
-            color="white",
-            size=30,
-            ),
-        ),
+            padding=20,
+            bgcolor=ft.colors.BLACK,
+            color=ft.colors.WHITE
+        )
     )
 
-    # Criar um layout de coluna e adicionar os elementos
-    coluna = ft.Column(
-        [titulo, botao],  # Adiciona os componentes na coluna
-        alignment=ft.MainAxisAlignment.CENTER,  # Centraliza verticalmente
-        horizontal_alignment=ft.CrossAxisAlignment.CENTER,  # Centraliza horizontalmente
-        spacing=20,  # Espaçamento entre os elementos
+    page.add(
+        ft.Container(
+            content=ft.Column([
+                ft.Text("Chat_friends", size=40, weight="bold"),
+                btn
+            ], alignment="center"),
+            bgcolor=ft.colors.BLUE_100,
+            padding=40,
+            border_radius=20,
+            width=600
+        )
     )
 
-    # Criar container colorido
-    container = ft.Container(
-        content=coluna,
-        padding=40, # espaco interno
-        bgcolor=ft.colors.BLUE_100, # or de fundo azul claro
-        border_radius=20, #bordar arredondadas
-        width=600, # largura container
-    )
-
-    # Adicionar o layout à página
-    pagina.add(container)
-
-# Executar a aplicação no navegador
-ft.app(target=main, view=ft.WEB_BROWSER)
+#ft.app(target=main) Start via app e not browser
+ft.app(target=main, port=8550, view=ft.WEB_BROWSER)

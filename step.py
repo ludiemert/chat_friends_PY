@@ -1,4 +1,10 @@
 # criar um sistema, anota todas as telas do projeto
+
+# Versoes:
+# 1 Trocar para Python 3.10 → Versão mais estável para o Flet.
+# 2 Ambiente virtual limpo → Sem conflitos de pacotes.
+# 3 Flet 0.22.0 → Versão testada e aprovada.
+
 # Tela inicial
   # Titulo: Pag inicial
   # Botao: Start chat
