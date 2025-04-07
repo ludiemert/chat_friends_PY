@@ -1,68 +1,20 @@
+# Flet
+# importar o flet
 import flet as ft
 
-def main(pagina: ft.Page):
-    pagina.title = "Chat_friends"
-    pagina.horizontal_alignment = ft.CrossAxisAlignment.CENTER
-    pagina.vertical_alignment = ft.MainAxisAlignment.CENTER
+#criar a funcao principal para rodar a aplicacao
+def main(pagina):  #costuma dar nome main para a funcao principal, Obrigatoriamente recebe pagina
+  #colocar oque a funcao vai fazer
 
-    titulo = ft.Text(
-        "Chat_friends",
-        size=40,
-        weight=ft.FontWeight.BOLD,
-    )
+    # titulo
+    titulo = ft.Text("Welcome to Chat_friends 🥰", color="purple", size=18) #ft.FERRAMENTA
+    pagina.add(titulo)
 
-    # Elementos do popup
-    titulo_popup = ft.Text("Welcome to chat 🥳")
-    caixa_nome = ft.TextField(label="Dig Your name...✒")
 
-    # evento do botao popup
-    def entrar_chat(evento):
-        nome = caixa_nome.value
-        if nome:
-            print(f"User {nome} start chat")
-            popup.open = False
-            pagina.update()
+    # botao inicial
+    botao = ft.ElevatedButton("Start_Chat🥳", color="blue")
+    pagina.add(botao)
 
-    # Botão dentro do popup
-    botao_popup = ft.ElevatedButton("Start_chat🥳", on_click=entrar_chat)
+# executar essa funcao com o flet
+ft.app(main)
 
-    # Configuração do popup, caixa de dialogo (AlertDialog)
-    popup = ft.AlertDialog(
-        open=False,
-        modal=True,
-        title=titulo_popup,
-        content=caixa_nome,
-        actions=[botao_popup]
-    )
-
-    def abrir_popup(evento):
-        pagina.dialog = popup
-        popup.open = True
-        pagina.update()
-
-    # Botão inicial
-    botao = ft.ElevatedButton(
-        "Start_Chat",
-        on_click=abrir_popup,
-        width=200,
-        height=80
-    )
-
-    coluna = ft.Column(
-        [titulo, botao],
-        alignment=ft.MainAxisAlignment.CENTER,
-        horizontal_alignment=ft.CrossAxisAlignment.CENTER,
-        spacing=20,
-    )
-
-    container = ft.Container(
-        content=coluna,
-        padding=40,
-        bgcolor=ft.colors.BLUE_100,
-        border_radius=20,
-        width=600,
-    )
-
-    pagina.add(container)
-
-ft.app(target=main, view=ft.WEB_BROWSER)   # toda vez que terminar de executar  a janela do codigo, ele tem que digitar control + C para encerrar o programa e nao ficar trabado

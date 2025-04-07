@@ -14,6 +14,7 @@
       # caixa de texto: escreva um texto
       # botao: entrar no chat
         # quando clicar no botao
+        # fechar o popup
         # sumir com o titulo
         # sumir com o botao de iniciar chat
           # carregar o chat
@@ -60,4 +61,22 @@ import flet as ft
 
 # uma funcao eh um objeto no PY = tudo no py tem caracteristica e atributo
 # ex: ft(obj) suas funcoes sao suas caract, qdo abre as opcoes
+
+
+# Sempre que contruir alguma coisa no flet fazer esses passos:
+# Flet
+# importar o flet
+#import flet as ft
+
+#criar a funcao principal para rodar a aplicacao
+#def nome_funcao(parametro): FUNCAO NO PY, essa funcao vai ser executada sempre que o usuario entrar no site
+#  oque a funcao vai fazer
+#  passo1
+#  passo2
+
+#def main():  #costuma dar nome main para a funcao principal
+  #colocar oque a funcao vai fazer
+
+# executar essa funcao com o flet
+#ft.app(main)
 
