@@ -12,9 +12,10 @@ def main(pagina: ft.Page):
     )
 
     # Elementos do popup
-    titulo_popup = ft.Text("Welcome to chat")
-    caixa_nome = ft.TextField(label="Dig Your name...")
+    titulo_popup = ft.Text("Welcome to chat 🥳")
+    caixa_nome = ft.TextField(label="Dig Your name...✒")
 
+    # evento do botao popup
     def entrar_chat(evento):
         nome = caixa_nome.value
         if nome:
@@ -25,7 +26,7 @@ def main(pagina: ft.Page):
     # Botão dentro do popup
     botao_popup = ft.ElevatedButton("Start_chat🥳", on_click=entrar_chat)
 
-    # Configuração do popup
+    # Configuração do popup, caixa de dialogo (AlertDialog)
     popup = ft.AlertDialog(
         open=False,
         modal=True,
@@ -64,4 +65,4 @@ def main(pagina: ft.Page):
 
     pagina.add(container)
 
-ft.app(target=main, view=ft.WEB_BROWSER)
+ft.app(target=main, view=ft.WEB_BROWSER)   # toda vez que terminar de executar  a janela do codigo, ele tem que digitar control + C para encerrar o programa e nao ficar trabado
