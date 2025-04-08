@@ -1,54 +1,46 @@
 # Flet
-# importar o flet
+# Importar o flet
 import flet as ft
 
-#criar a funcao principal para rodar a aplicacao
-def main(pagina):  #costuma dar nome main para a funcao principal, Obrigatoriamente recebe pagina
-  #colocar oque a funcao vai fazer
+# Criar a função principal para rodar a aplicação
+def main(pagina):  # Costuma dar nome 'main' para a função principal. Obrigatoriamente recebe 'pagina'
+    # Título
+    titulo = ft.Text("Welcome to Chat_friends 🥰", color="purple", size=18)
+    pagina.add(titulo)  # Código coloca esse elemento na página, ou colocar tudo no final da página
 
-    # titulo
-    titulo = ft.Text("Welcome to Chat_friends 🥰", color="purple", size=18) #ft.FERRAMENTA
-    pagina.add(titulo) # codig coloca esse elemento na pagina, ou colocar tudo no final da pagina
+    # Criar a função para on_click="start_chat"
+    def start_chat(evento):  # Função que executa algo
+        popup.open = False  # Fechar o popup
+        pagina.remove(titulo)  # Sumir com o título
+        pagina.remove(button_start)  # Sumir com o botão iniciar o chat
 
-    #criar a funcao para on_click="start_chat"
-    def start_chat(evento): # funcao que executa algo
-        # fechar o popup
-        # sumir com o titulo
-        # sumir com o botao iniciar o chat
+        # Carregar o chat
+        # Carregar o campo de enviar mensagem
+        # Carregar o botão enviar
+        pagina.update()  # Sempre que fizer algo visual na tela, sempre colocar esse comando
 
-        # carregar o chat
-        # carregar o campo de enviar mensagem
-        # carregr o botao enviar
+    # Criar o popup (No Flet o popup é chamado de AlertDialog, precisa configurar o que você quer que aconteça dentro do popup)
+    titulo_poup = ft.Text("Welcome to chat 🤩")  # Título do popup
+    box_name_user = ft.TextField(label="Enter your name....✒")  # Campo de texto que o usuário preenche, 'label' é uma orientação para o usuário
+    button_start_Chat = ft.ElevatedButton("Start Chat", on_click=start_chat)
 
+    # Colocar dentro do popup o que você criou
+    popup = ft.AlertDialog(
+        title=titulo_poup,
+        content=box_name_user,
+        actions=[button_start_Chat]  # Ações usa o 'actions', exemplo como botão, vem no plural para você ter mais de um botão
+    )
 
-    # criar o popup, no flet o popup eh chamado de AlertDialog, precisa configurar coisas oque voce quer que aconteca dentro do popup
-    titulo_poup = ft.Text("Welcome to chat 🤩") # titulo popup
-    box_name_user = ft.TextField(label="Enter your name....✒") # campo de texto que o usuario preenche, label eh um orientacao para o usuario
-    button_start_Chat = ft.ElevatedButton("Start Chat", on_click="start_chat")
+    # Função do botão (on_click=open_popup) a função vai dizer o que vai acontecer quando o usuário clicar no botão
+    def open_popup(evento):  # Ele obrigatoriamente recebe o evento do botão, evento de clique, tem que ter o evento para não dar erro
+        pagina.dialog = popup  # Colocar elementos de popup na tela, aparecer na frente da tela, caixa de diálogo
+        popup.open = True  # Abrir o popup, exibir o popup. A nossa página só pode ter um popup por vez
+        pagina.update()  # Sempre que você add alguma coisa na sua página tem que dar 'update' nela, sem apertar F5 para atualizar a página
+        print("Clicou no botão")  # Sempre que clicar no botão será um botão e um evento
 
-    # colocar dentro do popup oque criou
-    popup = ft.AlertDialog(title=titulo_poup,
-                           content=box_name_user,
-                           actions=[button_start_Chat] ) # acoes usa o actions exemp como botao, vem no plural para voce ter mais de um botao, e toda actions eh no plural vem dentro de [] colchetes para colocar varias acoes
+    # Botão inicial
+    button_start = ft.ElevatedButton("Start_Chat🥳", color="blue", on_click=open_popup)  # Ação (função) do botão on_click
+    pagina.add(button_start)  # Código coloca esse elemento na página, ou colocar tudo no final da página
 
-    # colocar elementos de popup na tela, aparecer na frente da tela
-
-    # botao inicial
-    #funcao do botao (on_click= open_popup) a funcao vai dizer oque vai acontecer qdo o usuario clicar no botao
-    def open_popup(evento): # ele obrigatoriamente recebe o evento do botao, evento de click, tem que ter o evento para nao dar erro
-         pagina.dialog = popup # colocar elementos de popup na tela, aparecer na frente da tela, caixa de dialogo
-        popup.open = True # abrir o popup, exibir o popup, a nossa pagina so pode ter um por vez
-        pagina.update() # sempre que voce add alguma coisa na sua pagina tem que dar update na sua pagina, sem apertar F5 para atualizar a pagina
-        print("clicou no botao") # sempre que clicar no botao sera um botao e um evento
-
-    button_start = ft.ElevatedButton("Start_Chat🥳", color="blue", on_click=open_popup)  #acao (funcao) do botao on_click,
-    pagina.add(button_start) # codig coloca esse elemento na pagina, ou colocar tudo no final da pagina
-
-    # exemplo colocar os elementos que vai ter na pagina
-    #pagina.add(titulo)
-    #paginaadd(botao)
-
-
-# executar essa funcao com o flet
-ft.app(main, view=ft.WEB_BROWSER) #abre formato web
-
+# Executar essa função com o Flet
+ft.app(main, view=ft.WEB_BROWSER)  # Abre o formato web
