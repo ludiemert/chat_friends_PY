@@ -10,10 +10,21 @@ def main(pagina):  #costuma dar nome main para a funcao principal, Obrigatoriame
     titulo = ft.Text("Welcome to Chat_friends 🥰", color="purple", size=18) #ft.FERRAMENTA
     pagina.add(titulo) # codig coloca esse elemento na pagina, ou colocar tudo no final da pagina
 
+    #criar a funcao para on_click="start_chat"
+    def start_chat(evento): # funcao que executa algo
+        # fechar o popup
+        # sumir com o titulo
+        # sumir com o botao iniciar o chat
+
+        # carregar o chat
+        # carregar o campo de enviar mensagem
+        # carregr o botao enviar
+
+
     # criar o popup, no flet o popup eh chamado de AlertDialog, precisa configurar coisas oque voce quer que aconteca dentro do popup
     titulo_poup = ft.Text("Welcome to chat 🤩") # titulo popup
-    box_name_user = ft.TextField(label="Enter your name....✒") # campo de texto que o usuario preenche
-    button_start_Chat = ft.ElevatedButton("Start Chat")
+    box_name_user = ft.TextField(label="Enter your name....✒") # campo de texto que o usuario preenche, label eh um orientacao para o usuario
+    button_start_Chat = ft.ElevatedButton("Start Chat", on_click="start_chat")
 
     # colocar dentro do popup oque criou
     popup = ft.AlertDialog(title=titulo_poup,
@@ -25,7 +36,7 @@ def main(pagina):  #costuma dar nome main para a funcao principal, Obrigatoriame
     # botao inicial
     #funcao do botao (on_click= open_popup) a funcao vai dizer oque vai acontecer qdo o usuario clicar no botao
     def open_popup(evento): # ele obrigatoriamente recebe o evento do botao, evento de click, tem que ter o evento para nao dar erro
-        pagina.dialog = popup # colocar elementos de popup na tela, aparecer na frente da tela
+         pagina.dialog = popup # colocar elementos de popup na tela, aparecer na frente da tela, caixa de dialogo
         popup.open = True # abrir o popup, exibir o popup, a nossa pagina so pode ter um por vez
         pagina.update() # sempre que voce add alguma coisa na sua pagina tem que dar update na sua pagina, sem apertar F5 para atualizar a pagina
         print("clicou no botao") # sempre que clicar no botao sera um botao e um evento
