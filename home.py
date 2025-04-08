@@ -11,19 +11,23 @@ def main(pagina):  #costuma dar nome main para a funcao principal, Obrigatoriame
     pagina.add(titulo) # codig coloca esse elemento na pagina, ou colocar tudo no final da pagina
 
     # criar o popup, no flet o popup eh chamado de AlertDialog, precisa configurar coisas oque voce quer que aconteca dentro do popup
-    titulo_poup = ft.Text("Welcome to chat") # titulo popup
-    box_name_user = ft.TextField() # campo de texto que o usuario preenche
+    titulo_poup = ft.Text("Welcome to chat 🤩") # titulo popup
+    box_name_user = ft.TextField(label="Enter your name....✒") # campo de texto que o usuario preenche
     button_start_Chat = ft.ElevatedButton("Start Chat")
 
-    #colocar dentro do popup oque criou
-    popup = ft.AlertDialog(
-        title=titulo_poup,
-        content=box_name_user, ) # acoes usa o actions exemp como botao, vem no plural para voce ter mais de um botao
+    # colocar dentro do popup oque criou
+    popup = ft.AlertDialog(title=titulo_poup,
+                           content=box_name_user,
+                           actions=[button_start_Chat] ) # acoes usa o actions exemp como botao, vem no plural para voce ter mais de um botao, e toda actions eh no plural vem dentro de [] colchetes para colocar varias acoes
 
+    # colocar elementos de popup na tela, aparecer na frente da tela
 
     # botao inicial
     #funcao do botao (on_click= open_popup) a funcao vai dizer oque vai acontecer qdo o usuario clicar no botao
     def open_popup(evento): # ele obrigatoriamente recebe o evento do botao, evento de click, tem que ter o evento para nao dar erro
+        pagina.dialog = popup # colocar elementos de popup na tela, aparecer na frente da tela
+        popup.open = True # abrir o popup, exibir o popup, a nossa pagina so pode ter um por vez
+        pagina.update() # sempre que voce add alguma coisa na sua pagina tem que dar update na sua pagina, sem apertar F5 para atualizar a pagina
         print("clicou no botao") # sempre que clicar no botao sera um botao e um evento
 
     button_start = ft.ElevatedButton("Start_Chat🥳", color="blue", on_click=open_popup)  #acao (funcao) do botao on_click,
