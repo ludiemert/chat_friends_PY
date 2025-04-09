@@ -5,8 +5,14 @@ import flet as ft
 # Criar a função principal para rodar a aplicação
 def main(pagina):  # Costuma dar nome 'main' para a função principal. Obrigatoriamente recebe 'pagina'
     # Título
-    titulo = ft.Text("Welcome to Chat_friends 🥰", color="purple", size=18)
+    titulo = ft.Text("Welcome to Chat_friends  🥰", color="purple", size=18)
     pagina.add(titulo)  # Código coloca esse elemento na página, ou colocar tudo no final da página
+
+    # criar campo enviar ms
+    camp_send_msg = ft.TextField(label="Enter your msg .... 👍")
+
+    #button enviar
+    button_send = ft.ElevatedButton("Send  💌")
 
     # Criar a função para on_click="start_chat"
     def start_chat(evento):  # Função que executa algo
@@ -16,12 +22,15 @@ def main(pagina):  # Costuma dar nome 'main' para a função principal. Obrigato
 
         # Carregar o chat
         # Carregar o campo de enviar mensagem
+        pagina.add(camp_send_msg)  # adicionar elemento na tela
         # Carregar o botão enviar
+        pagina.add(button_send)  # adicionar elemento na tela
+
         pagina.update()  # Sempre que fizer algo visual na tela, sempre colocar esse comando
 
     # Criar o popup (No Flet o popup é chamado de AlertDialog, precisa configurar o que você quer que aconteça dentro do popup)
-    titulo_poup = ft.Text("Welcome to chat 🤩")  # Título do popup
-    box_name_user = ft.TextField(label="Enter your name....✒")  # Campo de texto que o usuário preenche, 'label' é uma orientação para o usuário
+    titulo_poup = ft.Text("Welcome to chat  🤩")  # Título do popup
+    box_name_user = ft.TextField(label="Enter your name....  ✒")  # Campo de texto que o usuário preenche, 'label' é uma orientação para o usuário
     button_start_Chat = ft.ElevatedButton("Start Chat", on_click=start_chat)
 
     # Colocar dentro do popup o que você criou
