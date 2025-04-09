@@ -14,6 +14,9 @@ def main(pagina):  # Costuma dar nome 'main' para a função principal. Obrigato
     #button enviar
     button_send = ft.ElevatedButton("Send  💌")
 
+    # no flet temos colunas e linhas de uma tabela ft.Column(uma inf em baixo da outra) e ft.Row(linha da tabela uma do lado da outra)
+    line_send = ft.Row([camp_send_msg, button_send]) # linha uma inf do lado da outra
+
     # Criar a função para on_click="start_chat"
     def start_chat(evento):  # Função que executa algo
         popup.open = False  # Fechar o popup
@@ -21,10 +24,9 @@ def main(pagina):  # Costuma dar nome 'main' para a função principal. Obrigato
         pagina.remove(button_start)  # Sumir com o botão iniciar o chat
 
         # Carregar o chat
-        # Carregar o campo de enviar mensagem
-        pagina.add(camp_send_msg)  # adicionar elemento na tela
-        # Carregar o botão enviar
-        pagina.add(button_send)  # adicionar elemento na tela
+
+        # Carregar o campo de enviar mensagem e Carregar o botão enviar
+        pagina.add(line_send)  # adicionar elemento na tela
 
         pagina.update()  # Sempre que fizer algo visual na tela, sempre colocar esse comando
 
@@ -53,3 +55,6 @@ def main(pagina):  # Costuma dar nome 'main' para a função principal. Obrigato
 
 # Executar essa função com o Flet
 ft.app(main, view=ft.WEB_BROWSER)  # Abre o formato web
+
+# toda funcao que um botao executa ela tem que existir antes de voce criar o botao
+# sempre cria a funcao depois cria o botao
