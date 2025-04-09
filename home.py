@@ -9,12 +9,13 @@ def main(pagina):  # Costuma dar nome 'main' para a função principal. Obrigato
     pagina.add(titulo)  # Código coloca esse elemento na página, ou colocar tudo no final da página
 
     # funcao para enviar a msg
-    def send_message(evento) # uma funcao que recebe um evento
+    def send_message(evento): # uma funcao que recebe um evento
         text = ft.Text(camp_send_msg.value) #pega o valor que esta no campo enviar msg, eh o texto que o usuario escreveu
         chat.controls.append(text) # adicionar um elemento no chat, controls.append() isso adiciona um item no final, sempre add item no final
         # esse codigo pode ser  ou como acima
         # text = camp_send_msg.value #pega o valor que esta no campo enviar msg, eh o texto que o usuario escreveu
         # chat.controls.append(ft.Text(text)) # adicionar um elemento no chat, controls.append() isso adiciona um item no final, sempre add item no final
+        pagina.update() #sempre atualizar a pagina, e aparece a msg
 
 
     # criar campo enviar ms
