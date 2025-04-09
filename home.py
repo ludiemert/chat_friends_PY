@@ -19,7 +19,7 @@ def main(pagina):  # Costuma dar nome 'main' para a função principal. Obrigato
 
 
     # criar campo enviar ms
-    camp_send_msg = ft.TextField(label="Enter your msg .... 👍")
+    camp_send_msg = ft.TextField(label="Enter your msg .... 👍", on_submit=send_message) # on_submit=send_message => ao dar enter a msg eh enviada sem preciar precionar o enter
 
     #button enviar
     button_send = ft.ElevatedButton("Send  💌", on_click=send_message) # dar funcionalidade ao botao com a opcao on_click
