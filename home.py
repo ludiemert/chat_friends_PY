@@ -8,14 +8,28 @@ def main(pagina):  # Costuma dar nome 'main' para a função principal. Obrigato
     titulo = ft.Text("Welcome to Chat_friends  🥰", color="purple", size=18)
     pagina.add(titulo)  # Código coloca esse elemento na página, ou colocar tudo no final da página
 
+    # funcao para enviar a msg
+    def send_message(evento) # uma funcao que recebe um evento
+        text = ft.Text(camp_send_msg.value) #pega o valor que esta no campo enviar msg, eh o texto que o usuario escreveu
+        chat.controls.append(text) # adicionar um elemento no chat, controls.append() isso adiciona um item no final, sempre add item no final
+        # esse codigo pode ser  ou como acima
+        # text = camp_send_msg.value #pega o valor que esta no campo enviar msg, eh o texto que o usuario escreveu
+        # chat.controls.append(ft.Text(text)) # adicionar um elemento no chat, controls.append() isso adiciona um item no final, sempre add item no final
+
+
     # criar campo enviar ms
     camp_send_msg = ft.TextField(label="Enter your msg .... 👍")
 
     #button enviar
-    button_send = ft.ElevatedButton("Send  💌")
+    button_send = ft.ElevatedButton("Send  💌", on_click=send_message) # dar funcionalidade ao botao com a opcao on_click
 
     # no flet temos colunas e linhas de uma tabela ft.Column(uma inf em baixo da outra) e ft.Row(linha da tabela uma do lado da outra)
     line_send = ft.Row([camp_send_msg, button_send]) # linha uma inf do lado da outra
+
+    # criar a coluna de chat
+    chat = ft.Column() # tem que ser coluna porque eh uma conversa em baixo da outra
+
+
 
     # Criar a função para on_click="start_chat"
     def start_chat(evento):  # Função que executa algo
@@ -23,8 +37,7 @@ def main(pagina):  # Costuma dar nome 'main' para a função principal. Obrigato
         pagina.remove(titulo)  # Sumir com o título
         pagina.remove(button_start)  # Sumir com o botão iniciar o chat
 
-        # Carregar o chat
-
+        pagina.add(chat)   # Carregar o chat
         # Carregar o campo de enviar mensagem e Carregar o botão enviar
         pagina.add(line_send)  # adicionar elemento na tela
 
