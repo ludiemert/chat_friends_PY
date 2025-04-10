@@ -1,122 +1,116 @@
-# Importar a biblioteca Flet para criar a interface gráfica
+# Flet
+# Importar o flet
 import flet as ft
 
-# Função principal que será executada quando o aplicativo iniciar
-def main(pagina: ft.Page):
-    # Configurações iniciais da página
-    pagina.title = "Chat_friends"  # Define o título da página (janela)
-    pagina.horizontal_alignment = ft.CrossAxisAlignment.CENTER  # Alinha os elementos horizontalmente ao centro
-    pagina.vertical_alignment = ft.MainAxisAlignment.CENTER  # Alinha os elementos verticalmente ao centro
+# Criar a função principal para rodar a aplicação
+def main(pagina):  # Costuma dar nome 'main' para a função principal. Obrigatoriamente recebe 'pagina'
+    # Título
+    titulo = ft.Text("Welcome to Chat_friends  🥰", color="purple", size=18)
+    pagina.add(titulo)  # Código coloca esse elemento na página, ou colocar tudo no final da página
 
-    # Criar o título principal da aplicação
-    titulo = ft.Text(
-        "Chat_friends",  # Texto do título
-        size=40,  # Tamanho da fonte
-        weight=ft.FontWeight.BOLD,  # Define o peso da fonte como negrito
-    )
+    # para criar um sistema de chat com historico qdo o usuario nao esta conectado ficar armazenado as msgs eh preciso ter um banco de dados que nao eh o caso desse sistema que eh em tempo real
+    # da para criar regras tambem exemplo qdo usuario mandar msg impropria bloq msg, cria uma condicao para tirar todas as msgs que vc nao quer que entre no chat
+    # para deixar o projeto funcionando no ar precisa de um servidor e fazer um deploy, para fazer o deploy com o flet fazer pesquisa de passo a passo
+    # pode criar limite de usuario
 
-    # Campo de texto para o usuário digitar seu nome
-    caixa_nome = ft.TextField(label="Digite seu nome")
 
-    # Texto exibido no popup de boas-vindas
-    titulo_popup = ft.Text("Welcome to chat")
+    # websocket => comunicacao entre 2 usuarios = um tunel de comunicacao para as pessoas se comunicar e conversarem no chat
+    # websocket - tunel de comunicacao entre 2 user
+    # 1 - criar uma funcao para o tunel
+    def send_msg_tunnel(msg): #evento, criando a funcao que vai aparecer no tunel de comunicacao
+        # enviar tudo oque eu quero que aconteca para TODOS os usuarios que receberem a msg
+        # aconteca para TODOS os usuarios, criei o tunel, pego a msg do user envio no tunel
+        text = ft.Text(msg) # crio um texto na tela de todos os usuarios
+        chat.controls.append(text) # add texto na tela de todos users
+        pagina.update() # atualizar a pagina de todos users para aparecer no chat de todos
 
-    # Botão que será exibido no popup para iniciar o chat
-    botao = ft.ElevatedButton(text="Start_Chat")
+    # criar o tunel, o flet da o nome de pubsub para esse tunel de comunicacao
+    pagina.pubsub.subscribe(send_msg_tunnel) # pega a aplicacao (pagina) crio um tunel de comunicacao (pubsub) e estou dizendo para o tunel de comunicacao sempre que algo foi dito no tunel (subscribe) voce enviar essa funcao (send_msg_tunnel). #  passa a funcao que acabou de criar
+    # sao 3 coisas que precisa para acontecer um tunel de comunicacao
+        # 1 - criar uma funcao para o tunel, para todos os users
+        # 2 - criar o tunel de comunicacao, o flet da o nome de pubsub
+        # 3 - enviar uma msg para o tunel de comunicacao
+            # ao inves de fazer isso :
+                # text = ft.Text(f"{name_user} : {text_camp_msg}") #colocar valores dinamicos no PY colocar entre f{} # text = ft.Text(camp_send_msg.value) #pega o valor que esta no campo enviar msg, eh o texto que o usuario escreveu. # cria texto dinamico
+                # chat.controls.append(text) # adicionar um elemento no chat, controls.append() isso adiciona um item no final, sempre add item no final
 
-    # ========== FUNÇÃO ENTRAR CHAT ==========
-    # Função chamada quando o botão do popup é clicado
-    def entrar_chat(evento):
-        nome = caixa_nome.value  # Obtém o valor digitado no campo de texto (nome)
-        if nome:  # Verifica se o nome foi preenchido
-            print(f"User {nome} start chat")  # Exibe o nome do usuário no console
-            popup.open = False  # Fecha o popup
-            pagina.update()  # Atualiza a página
 
-            # Limpa toda a tela (removendo os componentes atuais)
-            pagina.controls.clear()
-            pagina.update()
 
-            # Novo título de boas-vindas no chat
-            titulo_chat = ft.Text(f"Olá, {nome}! Bem-vindo ao Chat 🎉", size=24)
+    # funcao completa para enviar a msg
+    def send_message(evento): # uma funcao que recebe um evento
+        #preencher texto campo msg e nome do user
+        name_user = box_name_user.value # pega o valor do nome do usuario
+        text_camp_msg = camp_send_msg.value # pega valores campo da msg
+        msg = f"{name_user} : {text_camp_msg}"  # vou enviar essa msg no tunel de comunicacao, passo 3
+        # passo 3 do tunel trocado a inf
+        # text = ft.Text(f"{name_user} : {text_camp_msg}") #colocar valores dinamicos no PY colocar entre f{} # text = ft.Text(camp_send_msg.value) #pega o valor que esta no campo enviar msg, eh o texto que o usuario escreveu. # cria texto dinamico
+        # chat.controls.append(text) # adicionar um elemento no chat, controls.append() isso adiciona um item no final, sempre add item no final
+        # esse codigo pode ser  ou como acima
+        # text = camp_send_msg.value #pega o valor que esta no campo enviar msg, eh o texto que o usuario escreveu
+        # chat.controls.append(ft.Text(text)) # adicionar um elemento no chat, controls.append() isso adiciona um item no final, sempre add item no final
+        pagina.pubsub.send_all(msg) # enviar para TODOS os usuarios que estao conectados a msg, envia msg no tunel de comunicacao
+        camp_send_msg.value = ""  # limpa a caixa de mensagem
+        pagina.update() #sempre atualizar a pagina, e aparece a msg
 
-            # Campo de texto para digitar mensagens no chat
-            campo_mensagem = ft.TextField(
-                label="Digite sua mensagem",
-                width=400
-            )
 
-            # Função para enviar a mensagem
-            def enviar_mensagem(evento):
-                print(f"{nome}: {campo_mensagem.value}")  # Exibe a mensagem no console
-                campo_mensagem.value = ""  # Limpa o campo de mensagem
-                pagina.update()  # Atualiza a página
+    # criar campo enviar ms
+    camp_send_msg = ft.TextField(label="Enter your msg .... 👍", on_submit=send_message) # on_submit=send_message => ao dar enter a msg eh enviada sem preciar precionar o enter
 
-            # Botão para enviar a mensagem
-            botao_enviar = ft.ElevatedButton("Enviar", on_click=enviar_mensagem)
+    #button enviar
+    button_send = ft.ElevatedButton("Send  💌", on_click=send_message) # dar funcionalidade ao botao com a opcao on_click
 
-            # Linha que contém o campo de mensagem e o botão de enviar
-            linha_envio = ft.Row(
-                [campo_mensagem, botao_enviar],
-                alignment=ft.MainAxisAlignment.CENTER  # Alinha os elementos ao centro
-            )
+    # no flet temos colunas e linhas de uma tabela ft.Column(uma inf em baixo da outra) e ft.Row(linha da tabela uma do lado da outra)
+    line_send = ft.Row([camp_send_msg, button_send]) # linha uma inf do lado da outra
 
-            # Adiciona os componentes do chat na nova tela
-            pagina.add(
-                ft.Column(
-                    [titulo_chat, linha_envio],  # Adiciona título e linha de envio de mensagem
-                    alignment=ft.MainAxisAlignment.CENTER,  # Alinha verticalmente ao centro
-                    horizontal_alignment=ft.CrossAxisAlignment.CENTER,  # Alinha horizontalmente ao centro
-                    spacing=20,  # Espaçamento entre os elementos
-                )
-            )
-            pagina.update()  # Atualiza a página para exibir os novos elementos
+    # criar a coluna de chat
+    chat = ft.Column() # tem que ser coluna porque eh uma conversa em baixo da outra
 
-    # Botão dentro do popup que aciona a função 'entrar_chat'
-    botao_popup = ft.ElevatedButton("Start_chat🥳", on_click=entrar_chat)
 
-    # Configuração do popup (diálogo de alerta)
+
+    # Criar a função para on_click="start_chat"
+    def start_chat(evento):  # Função que executa algo
+        popup.open = False  # Fechar o popup
+        pagina.remove(titulo)  # Sumir com o título
+        pagina.remove(button_start)  # Sumir com o botão iniciar o chat
+
+        pagina.add(chat)   # Carregar o chat
+        # Carregar o campo de enviar mensagem e Carregar o botão enviar
+        pagina.add(line_send)  # adicionar elemento na tela
+
+        # aparecer no chat a msg "Name....entrou no chat"
+        name_user = box_name_user.value
+        msg = f"{name_user} start chat 🧐" # msg para todos os users - passo 3 msg do tunel de comunicacao, para todos os users
+        #text_msg = ft.Text( f"{name_user} start chat 🧐" )
+        #chat.controls.append(text_msg) # add text no chat sempre que user entrar no chat
+        pagina.pubsub.send_all(msg)
+
+        pagina.update()  # Sempre que fizer algo visual na tela, sempre colocar esse comando
+
+    # Criar o popup (No Flet o popup é chamado de AlertDialog, precisa configurar o que você quer que aconteça dentro do popup)
+    titulo_poup = ft.Text("Welcome to chat  🤩")  # Título do popup
+    box_name_user = ft.TextField(label="Enter your name....  ✒")  # Campo de texto que o usuário preenche, 'label' é uma orientação para o usuário
+    button_start_Chat = ft.ElevatedButton("Start Chat", on_click=start_chat)
+
+    # Colocar dentro do popup o que você criou
     popup = ft.AlertDialog(
-        open=False,  # Inicialmente o popup está fechado
-        modal=True,  # Modal impede interação com o fundo enquanto o popup está aberto
-        title=titulo_popup,  # Título do popup
-        content=caixa_nome,  # Conteúdo do popup, que é o campo de nome
-        actions=[botao_popup]  # Botões do popup
+        title=titulo_poup,
+        content=box_name_user,
+        actions=[button_start_Chat]  # Ações usa o 'actions', exemplo como botão, vem no plural para você ter mais de um botão
     )
 
-    # Função para abrir o popup quando o botão principal da página for clicado
-    def abrir_popup(evento):
-        pagina.dialog = popup  # Associa o popup à página
-        popup.open = True  # Abre o popup
-        pagina.update()  # Atualiza a página
+    # Função do botão (on_click=open_popup) a função vai dizer o que vai acontecer quando o usuário clicar no botão
+    def open_popup(evento):  # Ele obrigatoriamente recebe o evento do botão, evento de clique, tem que ter o evento para não dar erro
+        pagina.dialog = popup  # Colocar elementos de popup na tela, aparecer na frente da tela, caixa de diálogo
+        popup.open = True  # Abrir o popup, exibir o popup. A nossa página só pode ter um popup por vez
+        pagina.update()  # Sempre que você add alguma coisa na sua página tem que dar 'update' nela, sem apertar F5 para atualizar a página
+        print("Clicou no botão")  # Sempre que clicar no botão será um botão e um evento
 
-    # Botão principal da tela inicial
-    botao = ft.ElevatedButton(
-        "Start_Chat",  # Texto do botão
-        on_click=abrir_popup,  # Função chamada ao clicar no botão
-        width=200,  # Largura do botão
-        height=80  # Altura do botão
-    )
+    # Botão inicial
+    button_start = ft.ElevatedButton("Start_Chat🥳", color="blue", on_click=open_popup)  # Ação (função) do botão on_click
+    pagina.add(button_start)  # Código coloca esse elemento na página, ou colocar tudo no final da página
 
-    # Layout da tela inicial
-    coluna = ft.Column(
-        [titulo, botao],  # Adiciona o título e o botão na coluna
-        alignment=ft.MainAxisAlignment.CENTER,  # Alinha verticalmente ao centro
-        horizontal_alignment=ft.CrossAxisAlignment.CENTER,  # Alinha horizontalmente ao centro
-        spacing=20,  # Espaçamento entre os elementos
-    )
+# Executar essa função com o Flet
+ft.app(main, view=ft.WEB_BROWSER)  # Abre o formato web
 
-    # Container que envolve a coluna para melhor estilização
-    container = ft.Container(
-        content=coluna,  # Conteúdo do container (a coluna)
-        padding=40,  # Espaçamento interno
-        bgcolor=ft.colors.BLUE_100,  # Cor de fundo azul claro
-        border_radius=20,  # Bordas arredondadas
-        width=600,  # Largura do container
-    )
-
-    # Adiciona o container à página
-    pagina.add(container)
-
-# Inicia o aplicativo no navegador web
-ft.app(target=main, view=ft.WEB_BROWSER)  # Executa a aplicação no navegador
+# toda funcao que um botao executa ela tem que existir antes de voce criar o botao
+# sempre cria a funcao depois cria o botao
