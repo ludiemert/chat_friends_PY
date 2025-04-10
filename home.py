@@ -8,9 +8,12 @@ def main(pagina):  # Costuma dar nome 'main' para a função principal. Obrigato
     titulo = ft.Text("Welcome to Chat_friends  🥰", color="purple", size=18)
     pagina.add(titulo)  # Código coloca esse elemento na página, ou colocar tudo no final da página
 
-    # funcao para enviar a msg
+    # funcao completa para enviar a msg
     def send_message(evento): # uma funcao que recebe um evento
-        text = ft.Text(camp_send_msg.value) #pega o valor que esta no campo enviar msg, eh o texto que o usuario escreveu
+        #preencher texto campo msg e nome do user
+        name_user = box_name_user.value # pega o valor do nome do usuario
+        text_camp_msg = camp_send_msg.value # pega valores campo da msg
+        text = ft.Text(f"{name_user} : {text_camp_msg}") #colocar valores dinamicos no PY colocar entre f{} # text = ft.Text(camp_send_msg.value) #pega o valor que esta no campo enviar msg, eh o texto que o usuario escreveu
         chat.controls.append(text) # adicionar um elemento no chat, controls.append() isso adiciona um item no final, sempre add item no final
         # esse codigo pode ser  ou como acima
         # text = camp_send_msg.value #pega o valor que esta no campo enviar msg, eh o texto que o usuario escreveu
