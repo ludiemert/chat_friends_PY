@@ -116,45 +116,53 @@ pagina.vertical_alignment = "center"
 pagina.horizontal_alignment = "center"
 The Text widget displays the title "Welcome to Chat_friends 🥰".
 
-2. Popup for User Name Input
+
+```
+
+________________________________________
+
+### 2. Popup for User Name Input
 When the user clicks the "Start Chat" button, a popup appears, prompting them to enter their name:
 
-python
-Copiar
-Editar
+```python
 popup = ft.AlertDialog(
     title=ft.Text("Welcome to chat 🤩"),
     content=ft.TextField(label="Enter your name....  ✒"),
     actions=[ft.ElevatedButton("Start Chat", on_click=start_chat)]
 )
-3. Starting the Chat
+```
+________________________________________
+
+### 3. Starting the Chat
 Once the user enters their name, they can start the chat, which changes the layout and adds the message controls:
 
-python
-Copiar
-Editar
+```python
+
 def start_chat(evento):
     popup.open = False  # Close the popup
     pagina.controls.clear()  # Clear initial screen
     pagina.add(chat)  # Add chat to page
     pagina.add(line_send)  # Add message input line
-4. Sending Messages
+```
+________________________________________
+
+### 4. Sending Messages
 When the user sends a message, it will be broadcast to all users in the chat using the pubsub system:
 
-python
-Copiar
-Editar
+```python
+
 def send_message(evento):
     name_user = box_name_user.value
     text_camp_msg = camp_send_msg.value
     msg = f"{name_user} : {text_camp_msg}"
     pagina.pubsub.send_all(msg)  # Send the message to all users
-5. Container for the First Screen
+```
+________________________________________
+
+### 5. Container for the First Screen
 To center the first screen elements (title and button), we use a Container:
 
-python
-Copiar
-Editar
+```python
 container_inicial = ft.Container(
     content=ft.Column(
         controls=[titulo, button_start],
@@ -164,53 +172,178 @@ container_inicial = ft.Container(
     alignment=ft.alignment.center,
     expand=True  # Expand the container to fill the screen
 )
-Getting Started
+```
+________________________________________
+
+## Getting Started
 To run this project locally, follow these steps:
 
-Clone the repository to your local machine:
+________________________________________
+## Clone the repository to your local machine:
 
-bash
-Copiar
-Editar
-git clone https://github.com/your-username/chat_friends.git
-Install the necessary dependencies:
+```python
+git clone [https://github.com/your-username/chat_friends.git](https://github.com/ludiemert/chat_friends_PY)
+```
+________________________________________
 
-bash
-Copiar
-Editar
+## Install the necessary dependencies:
+
+```python
 pip install flet
-Run the application:
+```
 
-bash
-Copiar
-Editar
+________________________________________
+## Run the application:
+
+```python
 python app.py
-Open your browser and visit the URL shown in the terminal.
+```
+________________________________________
+## Open your browser and visit the URL shown in the terminal.
 
-Technologies Used
+### Technologies Used
 Flet: A framework for building interactive web apps in Python.
 
-Python: The main programming language used to build the app.
+________________________________________
+####  Portugues: 
 
-License
-This project is licensed under the MIT License - see the LICENSE file for details.
+Claro! Aqui está o Markdown em português para o seu repositório no GitHub:
 
 markdown
 Copiar
 Editar
+# Chat_friends 🥰
 
-### Notes for your GitHub Repository:
+Bem-vindo ao **Chat_friends**, um aplicativo de chat simples criado com **Flet**! Este projeto permite que os usuários iniciem um chat e enviem mensagens em tempo real. A aplicação é fácil de usar e pode ser executada diretamente no seu navegador.
 
-1. Make sure to replace `https://github.com/your-username/chat_friends.git` with the actual URL of your repository.
-2. Ensure you have the images (`first_screen.png`, `chat_screen.png`) in the `images` folder inside your project. If the images are named differently, update the names accordingly.
-3. You can add more details about your project and improve the documentation with any other features or specific installation instructions.
+## Funcionalidades
 
-This structure will help make your project well-documented and easy to understand for other developers visiting your GitHub page.
+- **Interface Centralizada**: A primeira página é centralizada com uma mensagem de boas-vindas.
+- **Chat em Tempo Real**: Os usuários podem enviar mensagens em tempo real utilizando o sistema pubsub.
+- **Entrada de Nome de Usuário**: Na primeira tela, os usuários são solicitados a inserir seu nome antes de iniciar o chat.
+- **Envio de Mensagens**: Após iniciar o chat, os usuários podem enviar mensagens, que aparecerão em tempo real para todos os usuários.
 
+## Explicação do Código
 
+#### 1. **Layout da Página Principal**
 
+A primeira página é centralizada utilizando o seguinte código:
 
+```python
+pagina.vertical_alignment = "center"
+pagina.horizontal_alignment = "center"
+O widget Text exibe o título "Welcome to Chat_friends 🥰".
+```
 
+#### 2. Popup para Inserir o Nome do Usuário
+Quando o usuário clica no botão "Start Chat", um popup aparece pedindo para inserir seu nome:
 
+```python
+popup = ft.AlertDialog(
+    title=ft.Text("Welcome to chat 🤩"),
+    content=ft.TextField(label="Enter your name....  ✒"),
+    actions=[ft.ElevatedButton("Start Chat", on_click=start_chat)]
+)
+```
 
+#### 3. Iniciando o Chat
+Depois que o usuário insere seu nome, ele pode começar o chat, o que muda o layout e adiciona os controles de mensagem:
+
+```python
+def start_chat(evento):
+    popup.open = False  # Fecha o popup
+    pagina.controls.clear()  # Limpa a tela inicial
+    pagina.add(chat)  # Adiciona o chat à página
+    pagina.add(line_send)  # Adiciona a linha de entrada de mensagem
+```
+
+#### 4. Enviando Mensagens
+Quando o usuário envia uma mensagem, ela será transmitida para todos os usuários do chat usando o sistema pubsub:
+
+```python
+def send_message(evento):
+    name_user = box_name_user.value
+    text_camp_msg = camp_send_msg.value
+    msg = f"{name_user} : {text_camp_msg}"
+    pagina.pubsub.send_all(msg)  # Envia a mensagem para todos os usuários
+```
+
+#### 5. Container para a Primeira Tela
+Para centralizar os elementos da primeira tela (título e botão), utilizamos um Container:
+
+```python
+container_inicial = ft.Container(
+    content=ft.Column(
+        controls=[titulo, button_start],
+        alignment="center",  # Alinhamento vertical
+        horizontal_alignment="center"  # Alinhamento horizontal
+    ),
+    alignment=ft.alignment.center,
+    expand=True  # Expande o container para preencher a tela
+)
+```
+
+#### 6. Estrutura do Layout
+A estrutura do layout é gerenciada com pagina.add(container_inicial) para a primeira tela e com a adição do chat e linha de envio na segunda tela.
+
+#### Como Começar
+Para rodar este projeto localmente, siga estes passos:
+
+#### Clone o repositório para sua máquina local:
+
+```python
+git clone [https://github.com/seu-usuario/chat_friends.git](https://github.com/ludiemert/chat_friends_PY)
+```
+
+#### Instale as dependências necessárias:
+
+```python
+pip install flet
+```
+
+Execute o aplicativo:
+
+```python
+python app.py
+```
+
+#### Abra seu navegador e visite a URL que será mostrada no terminal.
+
+#### Tecnologias Usadas
+Flet: Framework para construir aplicativos interativos em Python.
+
+Python: Linguagem principal utilizada para desenvolver o app.
+
+________________________________________
+### Python: The main programming language used to build the app.
+
+#### 🤝 Contributing
+If you would like to contribute to this project, feel free to open an issue or submit a pull request! 🚀
+________________________________________
+#### 📜 License
+This project is licensed under the MIT License - see the LICENSE file for details.
+👩💻 Developed with 💙 by [[LuDiemert](https://www.linkedin.com/in/lucianadiemert/)]
+
+________________________________________
+- #### My LinkedIn - [![Linkedin Badge](https://img.shields.io/badge/-LucianaDiemert-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/lucianadiemert/)](https://www.linkedin.com/in/lucianadiemert/)
+
+________________________________________
+## 🌐 **Contact**
+<img align="left" src="https://www.github.com/ludiemert.png?size=150">
+
+#### [**Luciana Diemert**](https://github.com/ludiemert)
+
+🛠 Full-Stack Developer <br>
+🖥️ Python Enthusiast | Computer Vision | AI Integrations <br>
+📍 São Jose dos Campos – SP, Brazil
+
+<a href="https://www.linkedin.com/in/lucianadiemert" target="_blank"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin&logoColor=white" alt="LinkedIn Badge" height="25"></a>&nbsp;
+<a href="mailto:lucianadiemert@gmail.com" target="_blank"><img src="https://img.shields.io/badge/Gmail-D14836?style=flat&logo=gmail&logoColor=white" alt="Gmail Badge" height="25"></a>&nbsp;
+<a href="#"><img src="https://img.shields.io/badge/Discord-%237289DA.svg?logo=discord&logoColor=white" title="LuDiem#0654" alt="Discord Badge" height="25"></a>&nbsp;
+<a href="https://www.github.com/ludiemert" target="_blank"><img src="https://img.shields.io/badge/GitHub-100000?style=flat&logo=github&logoColor=white" alt="GitHub Badge" height="25"></a>&nbsp;
+
+<br clear="left"/>
+
+---
+Developed with ❤ by [ludiemert](https://github.com/ludiemert).
 
