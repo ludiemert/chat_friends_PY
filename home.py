@@ -13,11 +13,12 @@ def main(pagina):  # Costuma dar nome 'main' para a função principal. Obrigato
         #preencher texto campo msg e nome do user
         name_user = box_name_user.value # pega o valor do nome do usuario
         text_camp_msg = camp_send_msg.value # pega valores campo da msg
-        text = ft.Text(f"{name_user} : {text_camp_msg}") #colocar valores dinamicos no PY colocar entre f{} # text = ft.Text(camp_send_msg.value) #pega o valor que esta no campo enviar msg, eh o texto que o usuario escreveu
+        text = ft.Text(f"{name_user} : {text_camp_msg}") #colocar valores dinamicos no PY colocar entre f{} # text = ft.Text(camp_send_msg.value) #pega o valor que esta no campo enviar msg, eh o texto que o usuario escreveu. # cria texto dinamico
         chat.controls.append(text) # adicionar um elemento no chat, controls.append() isso adiciona um item no final, sempre add item no final
         # esse codigo pode ser  ou como acima
         # text = camp_send_msg.value #pega o valor que esta no campo enviar msg, eh o texto que o usuario escreveu
         # chat.controls.append(ft.Text(text)) # adicionar um elemento no chat, controls.append() isso adiciona um item no final, sempre add item no final
+        camp_send_msg.value = ""  # limpa a caixa de mensagem
         pagina.update() #sempre atualizar a pagina, e aparece a msg
 
 
@@ -44,6 +45,11 @@ def main(pagina):  # Costuma dar nome 'main' para a função principal. Obrigato
         pagina.add(chat)   # Carregar o chat
         # Carregar o campo de enviar mensagem e Carregar o botão enviar
         pagina.add(line_send)  # adicionar elemento na tela
+
+        # aparecer no chat a msg "Name....entrou no chat"
+        name_user = box_name_user.value
+        text_msg = ft.Text( f"{name_user} start chat 🧐" )
+        chat.controls.append(text_msg) # add text no chat sempre que user entrar no chat
 
         pagina.update()  # Sempre que fizer algo visual na tela, sempre colocar esse comando
 
